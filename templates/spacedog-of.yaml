@@ -5,7 +5,7 @@ spec:
   templates:
 
   # This is the name of the template, which is used to reference it in the workflow. This field is required.
-  - name: spacedog_of
+  - name: spacedog-of
 
     # `generic-task` is the supertemplate that all templates (that don't contain a `steps` section) must inherit from
     parent: generic-task
@@ -33,5 +33,5 @@ spec:
     # This section is where output artifacts are listed. They must be listed here, or else they will get deleted when the template completes. They must be under the `app` directory in order to be saved.
     outputs:
       artifacts:
-      - name: spacedog_of_out
+      - name: spacedog-of-out
         path: /app/of_test.json
