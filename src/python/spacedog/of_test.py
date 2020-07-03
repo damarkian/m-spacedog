@@ -23,6 +23,8 @@ def of_test():
     molecule = of.MolecularData(filename=moleculeFile)
     molecule.load()
 
+    # TODO: separate all these steps to produce one dictionary entry per step
+
     e_nuc = molecule.nuclear_repulsion
 
     S = np.load(str(Path(cwd + "/moldata/overlap.npy")))
