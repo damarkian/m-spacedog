@@ -24,7 +24,7 @@ def of_test(jsonfile):
     e_nuc = molecule.nuclear_repulsion
 
     S = np.load(str(Path(cwd + "/moldata/overlap.npy")))
-    Hcore = np.load(str(Path(cwd + "/moldata/hcore.npy")))
+    Hcore = np.load(str(Path(cwd + "/moldata/h_core.npy")))
     TwoERI = np.load(str(Path(cwd + "/moldata/two_eri.npy")))
 
     _, X = scipy.linalg.eigh(Hcore, S)
