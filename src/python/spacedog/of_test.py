@@ -21,10 +21,11 @@ def of_test():
     cwd = os.path.dirname(os.path.realpath(__file__))
     moleculeFile = str(Path(cwd + "/moldata/h3_250.hdf5")) 
     molecule = of.MolecularData(filename=moleculeFile)
+    molecule.load()
+
+    e_nuc = molecule.nuclear_repulsion
 
     S = np.load(str(Path(cwd + "/moldata/overlap.npy")))
-
-    e_nuc = molecule.load()
 
     opd = {}
     opd["eNuc"] = str(e_nuc)
