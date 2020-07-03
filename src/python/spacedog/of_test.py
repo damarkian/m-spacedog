@@ -13,10 +13,6 @@ def outputjson(_teststr, jsonfile):
         f.write(json.dumps(_jsondict))
 
 
-def outputjson2(idict, jsonfile):
-    with open(jsonfile, 'w') as f:
-        f.write(json.dumps(idict))
-
 def of_test(jsonfile):
     cwd = os.path.dirname(os.path.realpath(__file__))
     moleculeFile = str(Path(cwd + "/moldata/h3_250.hdf5")) 
@@ -28,6 +24,10 @@ def of_test(jsonfile):
     e_nuc = molecule.nuclear_repulsion
 
     S = np.load(str(Path(cwd + "/moldata/overlap.npy")))
+    Hcore = np.load(str(Path(cwd + "/moldata/hcore.npy")))
+    TwoERI = np.load(str(Path(cwd + "/moldata/two_eri.npy")))
+
+    _, X = scipy.linalg.eigh(Hcore, S)
 
     opd = {}
     opd["eNuc"] = str(e_nuc)

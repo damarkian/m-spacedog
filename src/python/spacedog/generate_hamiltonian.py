@@ -1,5 +1,6 @@
 import numpy as np
 from itertools import product
+from openfermion.ops import InteractionOperator, InteractionRDM
 
 def generate_hamiltonian(obi, tbi, nuclear_repulsion, tolerance):
 
@@ -29,10 +30,12 @@ def generate_hamiltonian(obi, tbi, nuclear_repulsion, tolerance):
     obc[np.absolute(obc) < tolerance] = 0.0
     tbc[np.absolute(tbc) < tolerance] = 0.0
 
-    hamiltonian = {}
-    hamiltonian['oneBodyCoefficients'] = obc
-    hamiltonian['twoBodyCoefficients'] = tbc 
-    hamiltonian['nuclearRepulsion'] = nuclear_repulsion
+    # hamiltonian = {}
+    # hamiltonian['oneBodyCoefficients'] = obc
+    # hamiltonian['twoBodyCoefficients'] = tbc 
+    # hamiltonian['nuclearRepulsion'] = nuclear_repulsion
 
-    return hamiltonian
+    molHamiltonian = InteractionOperator(nuclear_repulsion, obc, tbc)
+
+    return molHamiltonian
 
