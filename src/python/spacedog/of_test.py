@@ -31,7 +31,7 @@ def of_test(jsonfile):
 
     opd = {}
     opd["eNuc"] = str(e_nuc)
-    opd["overlapMatrix"] = np.array2string(S)
+    #opd["overlapMatrix"] = np.array2string(S)
     opd["Schema"] = "spacedog-result"
 
     with open(jsonfile, 'w') as f:
