@@ -1,8 +1,15 @@
+from typing import Optional
 import numpy as np
 from itertools import product
 from openfermion.ops import InteractionOperator, InteractionRDM
+from openfermion.utils import get_fermion_operator
 
-def generate_hamiltonian(obi, tbi, nuclear_repulsion, tolerance):
+
+
+
+
+def generate_hamiltonian(obi: np.ndarray, tbi: np.ndarray, nuclear_repulsion: float, 
+                         tolerance=1.0E-12):
 
     n_qubits = 2 * obi.shape[0]
 
