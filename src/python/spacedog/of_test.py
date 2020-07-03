@@ -16,10 +16,7 @@ def of_test():
     cwd = os.path.dirname(os.path.realpath(__file__))
     moleculeFile = str(Path(cwd + "/moldata/h3_250.hdf5")) 
     molecule = of.MolecularData(filename=moleculeFile)
-    molecule.load()
-
-    outputdict = {}
-    outputdict["eNuc"] = molecule.nuclear_repulsion
-    return(outputdict)
+    e_nuc = molecule.load()
+    return(enuc)
 
 
