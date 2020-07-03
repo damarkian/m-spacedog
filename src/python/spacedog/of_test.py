@@ -19,7 +19,6 @@ def of_test():
     molecule.load()
 
     outputdict = {}
-    outputdict["schema"] = "spacedog-result"
     outputdict["eNuc"] = molecule.nuclear_repulsion
     return(outputdict)
 

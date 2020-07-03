@@ -14,10 +14,18 @@ class NumpyEncoder(json.JSONEncoder):
 
 
 def dict2json(inputDict, jsonfile): 
-
+    
     jdump = json.dumps(inputDict, cls=NumpyEncoder)
+    with open(jsonfile, 'w') as f1:
+        json.dump(jdump, f1)
+    addschema = {}
+    addschema["schema"] = "are-my-test-results-back"
+    with open(jsonfile, 'r+') as f2:
+        tempj = json.load(f2)
+        tempj.update(addschema)
+        f2.seek(0)
+        json.dump(tempj, f2)
 
-    with open(jsonfile, 'w') as f:
-        json.dump(jdump, f)
+    
 
 
