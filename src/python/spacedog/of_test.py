@@ -17,7 +17,10 @@ def of_test():
     moleculeFile = str(Path(cwd + "/moldata/h3_250.hdf5")) 
     molecule = of.MolecularData(filename=moleculeFile)
     molecule.load()
-    e_nuc = molecule.nuclear_repulsion
-    return(e_nuc)
+
+    outputdict = {}
+    outputdict["schema"] = "spacedog-result"
+    outputdict["eNuc"] = molecule.nuclear_repulsion
+    return(outputdict)
 
 
