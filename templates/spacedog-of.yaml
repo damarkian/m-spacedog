@@ -27,9 +27,8 @@ spec:
         raw:
           data: |
             from spacedog.of_test import *
-            odict = {}
-            odict = of_test()
-            outputjson2(odict, '/app/of_test.json')
+            of_test('/app/of_test.json')
+
 
     # This section is where output artifacts are listed. They must be listed here, or else they will get deleted when the template completes. They must be under the `app` directory in order to be saved.
     outputs:
