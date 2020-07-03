@@ -17,6 +17,6 @@ def of_test():
     moleculeFile = str(Path(cwd + "/moldata/h3_250.hdf5")) 
     molecule = of.MolecularData(filename=moleculeFile)
     e_nuc = molecule.load()
-    return(enuc)
+    return(e_nuc)
 
 
