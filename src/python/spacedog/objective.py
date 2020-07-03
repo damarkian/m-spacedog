@@ -6,6 +6,18 @@ from openfermion.utils import get_fermion_operator
 
 
 
+class RhfObjective(): 
+
+    def __init__(self, hamiltonian: InteractionOperator, num_electrons: int):
+        self.hamiltonian = hamiltonian
+        self.fermion_hamiltonian = get_fermion_operator(self.hamiltonian)
+        self.num_qubits = hamiltonian.one_body_tensor.shape[0]
+        self.num_orbitals = self.num_qubits // 2
+        self.num_electrons = num_electrons
+        self.nocc = self.num_electrons // 2
+        self.nvirt = self.num_orbitals - self.nocc
+        self.occ = list(range(self.nocc))
+        self.virt = list(range(self.nocc, self.nocc + self.nvirt))
 
 
 def generate_hamiltonian(obi: np.ndarray, tbi: np.ndarray, nuclear_repulsion: float, 

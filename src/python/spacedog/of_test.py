@@ -4,6 +4,7 @@ import numpy as np
 import scipy.linalg
 import openfermion as of
 import json
+from .objective import generate_hamiltonian
 
 def outputjson(_teststr, jsonfile):
     _jsondict = {}
@@ -28,6 +29,11 @@ def of_test(jsonfile):
     TwoERI = np.load(str(Path(cwd + "/moldata/two_eri.npy")))
 
     _, X = scipy.linalg.eigh(Hcore, S)
+
+    obi = of.general_basis_change(Hcore, X, (1, 0))
+    tbi = np.einsum('psqr', of.general_basis_change(TwoERI, X, (1, 0, 1, 0)))
+
+    hamiltonian = generate_hamiltonian(obi, tbi, molecule.nuclear_repulsion, 1.0e-12)
 
     opd = {}
     opd["eNuc"] = str(e_nuc)
