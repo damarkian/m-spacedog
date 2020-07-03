@@ -27,7 +27,7 @@ spec:
         raw:
           data: |
             from spacedog.of_test import *
-            
+            odict = {}
             odict = of_test()
             outputjson2(odict, '/app/of_test.json')
 
