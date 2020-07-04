@@ -35,6 +35,10 @@ def of_test(jsonfile):
 
     hamiltonian = generate_hamiltonian(obi, tbi, molecule.nuclear_repulsion, 1.0e-12)
 
+    rhf_objective = RestrictedHartreeFockObjective(hamiltonian, molecule.n_electrons)
+
+    scipy_result = rhf_minimization(rhf_objective)
+
     opd = {}
     opd["eNuc"] = str(e_nuc)
     opd["overlapMatrix"] = np.array2string(S)
