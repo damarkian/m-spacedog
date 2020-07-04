@@ -2,7 +2,8 @@ from typing import Optional
 import numpy as np
 from itertools import product
 from openfermion.ops import InteractionOperator, InteractionRDM
-from openfermion.utils import get_fermion_operator
+from openfermion.utils import wedge
+from openfermion.transforms import get_fermion_operator
 
 
 
