@@ -1,10 +1,14 @@
 import os
 from pathlib import Path
+from typing import Tuple
 import numpy as np
 import scipy.linalg
 import openfermion as of
 import json
-from .objective import generate_hamiltonian
+
+from .gradient_hf import rhf_minimization
+from .objective import (RestrictedHartreeFockObjective, generate_hamiltonian)
+
 
 def outputjson(_teststr, jsonfile):
     _jsondict = {}
@@ -13,6 +17,11 @@ def outputjson(_teststr, jsonfile):
     with open(jsonfile, 'w') as f:
         f.write(json.dumps(_jsondict))
 
+def make_h3_250() -> Tuple[RestrictedHartreeFockObjective, of.MolecularData, 
+                           np.ndarray, np.ndarray, np.ndarray]:
+    cwd = os.path.dirname(os.path.realpath(__file__))
+    h3_250_path = str(Path(cwd+ "/moldata/"))
+    
 
 def of_test(jsonfile):
     cwd = os.path.dirname(os.path.realpath(__file__))
