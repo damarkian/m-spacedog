@@ -34,8 +34,24 @@ def of_test(jsonfile):
     rhf_objective, molecule, parameters, obi, tbi = make_h3_2_5()
     ansatz, energy, gradient = rhf_func_generator(rhf_objective)
 
+    # settings for quantum resources
+    qubits = [cirq.GridQubit(0, x) for x in range(molecule.n_orbitals)]
+    sampler = cirq.Simulator(dtype=np.complex128)  # this can be a QuantumEngine
+
+    # OpdmFunctional contains an interface for running experiments
+    opdm_func = OpdmFunctional(qubits=qubits,
+                               sampler=sampler,
+                               constant=molecule.nuclear_repulsion,
+                               one_body_integrals=obi,
+                               two_body_integrals=tbi,
+                               num_electrons=molecule.n_electrons // 2,  # only simulate spin-up electrons
+                               clean_xxyy=True,
+                               purification=True,
+                               verbose=True
+                               )
+
     opd = {}
-    opd["energy"] = str(energy)
+    opd["energy"] = str(rhf_objective)
     opd["schema"] = "spacedog-result"
 
     with open(jsonfile, 'w') as f:
