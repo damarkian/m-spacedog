@@ -51,8 +51,55 @@ def of_test(jsonfile):
                                verbose=True
                                )
 
+    measurement_data = opdm_func.calculate_data(parameters)
+
+  
+    opdm, var_dict = compute_opdm(measurement_data,
+                                return_variance=True)
+    opdm_pure = mcweeny_purification(opdm)
+
+
+   
+    raw_energies = []
+    raw_fidelity_witness = []
+    purified_eneriges = []
+    purified_fidelity_witness = []
+    purified_fidelity = []
+    true_unitary = ansatz(parameters)
+    nocc = molecule.n_electrons // 2
+    nvirt = molecule.n_orbitals - nocc
+
+    initial_fock_state = [1] * nocc + [0] * nvirt
+    for _ in range(1000):  # 1000 repetitions of the measurement
+        new_opdm = resample_opdm(opdm, var_dict)
+        raw_energies.append(opdm_func.energy_from_opdm(new_opdm))
+        raw_fidelity_witness.append(
+            fidelity_witness(target_unitary=true_unitary,
+                            omega=initial_fock_state,
+                            measured_opdm=new_opdm)
+        )
+        # fix positivity and trace of sampled 1-RDM if strictly outside
+        # feasible set
+        w, v = np.linalg.eigh(new_opdm)
+        if len(np.where(w < 0)[0]) > 0:
+            new_opdm = fixed_trace_positive_projection(new_opdm, nocc)
+
+        new_opdm_pure = mcweeny_purification(new_opdm)
+        purified_eneriges.append(opdm_func.energy_from_opdm(new_opdm_pure))
+        purified_fidelity_witness.append(
+            fidelity_witness(target_unitary=true_unitary,
+                            omega=initial_fock_state,
+                            measured_opdm=new_opdm_pure)
+        )
+        purified_fidelity.append(
+            fidelity(target_unitary=true_unitary,
+                    measured_opdm=new_opdm_pure)
+        )
+
+
     opd = {}
-    opd["energy"] = str(rhf_objective)
+    opd["energy"] = str(molecule.hf_energy)
+    opd["trueEnergy"] = str(energy(parameters))
     opd["schema"] = "spacedog-result"
 
     with open(jsonfile, 'w') as f:
