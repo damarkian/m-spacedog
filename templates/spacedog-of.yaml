@@ -26,7 +26,7 @@ spec:
         path: /app/main.py
         raw:
           data: |
-            from spacedog.of_test import *
+            from spacedog.of_test import of_test
             of_test('/app/of_test.json')
 
 

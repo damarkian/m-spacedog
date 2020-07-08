@@ -8,7 +8,7 @@ from scipy.linalg import expm
 
 from openfermion import slater_determinant_preparation_circuit
 
-import .util
+from .util import *
 # pylint: disable=C
 
 
