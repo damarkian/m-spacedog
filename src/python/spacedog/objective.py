@@ -6,6 +6,26 @@ from openfermion.utils import wedge
 from openfermion.transforms import get_fermion_operator
 from .circuits import rhf_params_to_matrix
 
+def get_matrix_of_eigs(w: np.ndarray) -> np.ndarray:
+    """
+    Transform the eigenvalues for getting the gradient
+
+    .. math:
+        f(w) \rightarrow \frac{e^{i (\lambda_{i} - \lambda_{j})}{i (\lambda_{i} - \lambda_{j})}
+
+    :param w: eigenvalues of C-matrix
+    :return: new array of transformed eigenvalues
+    """
+    transform_eigs = np.zeros((w.shape[0], w.shape[0]),
+                                 dtype=np.complex128)
+    for i, j in product(range(w.shape[0]), repeat=2):
+        if np.isclose(abs(w[i] - w[j]), 0):
+            transform_eigs[i, j] = 1
+        else:
+            transform_eigs[i, j] = (np.exp(1j * (w[i] - w[j])) - 1) / (
+                        1j * (w[i] - w[j]))
+    return transform_eigs
+
 class RestrictedHartreeFockObjective():
     """
     Implementation of the objective function code for Restricted Hartree-Fock
