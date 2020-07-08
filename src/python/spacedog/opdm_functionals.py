@@ -2,9 +2,9 @@ from typing import List, Optional
 import cirq
 import numpy as np
 import scipy as sp
-import .circuits as ccc
-import .analysis as cca
-import .util as ccu
+from . import circuits as ccc
+from . import analysis as cca
+from . import util as ccu
 from .objective import rhf_params_to_matrix
 
 
