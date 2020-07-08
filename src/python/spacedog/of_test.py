@@ -5,6 +5,7 @@ import numpy as np
 import scipy.linalg
 import openfermion as of
 import json
+import cirq
 
 from .gradient_hf import rhf_func_generator
 from .opdm_functionals import OpdmFunctional
