@@ -21,6 +21,12 @@ from .gradient_hf import rhf_minimization
 from .objective import (RestrictedHartreeFockObjective, generate_hamiltonian)
 from .molecular_example_odd_qubits import make_h3_2_5
 
+from .mfopt import moving_frame_augmented_hessian_optimizer
+from .opdm_functionals import RDMGenerator
+#import matplotlib.pyplot as plt
+
+
+
 def outputjson(_teststr, jsonfile):
     _jsondict = {}
     _jsondict["result"] = _teststr
@@ -96,10 +102,24 @@ def of_test(jsonfile):
                     measured_opdm=new_opdm_pure)
         )
 
+    rdm_generator = RDMGenerator(opdm_func, purification=True)
+    opdm_generator = rdm_generator.opdm_generator
+
+    result = moving_frame_augmented_hessian_optimizer(
+        rhf_objective=rhf_objective,
+        initial_parameters= parameters + 5.0E-1 ,
+        opdm_aa_measurement_func=opdm_generator,
+        verbose=True, delta=0.03,
+        max_iter=120,
+        hessian_update='diagonal',
+        rtol=0.050E-2)
+
+    resultstring = np.array2string(np.array(result.func_vals))
 
     opd = {}
     opd["energy"] = str(molecule.hf_energy)
     opd["trueEnergy"] = str(energy(parameters))
+    opd["resultFuncVals"] = resultstring
     opd["schema"] = "spacedog-result"
 
     with open(jsonfile, 'w') as f:
