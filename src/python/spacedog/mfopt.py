@@ -12,9 +12,9 @@ from openfermion.ops import FermionOperator, InteractionRDM
 
 from joblib import Parallel, delayed  # type: ignore
 
-from openfermioncirq.experiments.hfvqe.objective import \
+from .objective import \
     RestrictedHartreeFockObjective
-from openfermioncirq.experiments.hfvqe.circuits import rhf_params_to_matrix
+from .circuits import rhf_params_to_matrix
 
 
 def get_one_body_fermion_operator(coeff_matrix):  # testpragma: no cover
