@@ -15,13 +15,13 @@ def make_h6_2_1() -> Tuple[RestrictedHartreeFockObjective,
                            np.ndarray,
                            np.ndarray,
                            np.ndarray]:
-    # load the molecule from moelcular data
+
     # load the molecule from moelcular data
     cwd = os.path.dirname(os.path.realpath(__file__))
     h6_2_1_path = str(Path(cwd 
                        + "/molecular_data/hydrogen_chains/h_6_sto-3g/bond_distance_2.1/")) 
 
-    molfile = os.path.join(h6_2_1_path, 'H6_sto-3g_singlet_linear_r-2.5.hdf5')
+    molfile = os.path.join(h6_2_1_path, 'H6_sto-3g_singlet_linear_r-2.1.hdf5')
     molecule = of.MolecularData(filename=molfile)
     molecule.load()
 
