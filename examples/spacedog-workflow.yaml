@@ -28,6 +28,14 @@ resources:
   parameters:    
     url: "git@github.com:quantumlib/OpenFermion-Cirq.git"
     branch: "master"
+- name: OpenFermion-Psi4
+  type: git
+  parameters:
+    url: "git@github.com:quantumlib/OpenFermion-Psi4.git"
+- name: Psi4
+  type: git
+  parameters:
+    url: "git@github.com:psi4/psi4.git"
 #url: "git@github.com:quantumlib/OpenFermion-Cirq.git#0.4.0"
 
 # Data to help you easily work with your workflow
@@ -60,7 +68,7 @@ spec:
 
     # This template runs the `welcome-to-orquestra` template in the `welcome` resource
     - - name: saludos
-        template: spacedog_of
+        template: spacedog-of
         arguments:
           parameters:
           - resources: [m-spacedog, OpenFermion, Cirq, OpenFermion-Cirq]

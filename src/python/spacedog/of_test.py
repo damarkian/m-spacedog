@@ -35,7 +35,8 @@ def outputjson(_teststr, jsonfile):
     with open(jsonfile, 'w') as f:
         f.write(json.dumps(_jsondict))
 
-    
+
+
 
 def of_test(jsonfile):
 
