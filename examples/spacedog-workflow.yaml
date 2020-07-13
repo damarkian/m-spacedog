@@ -33,6 +33,11 @@ resources:
   parameters:
     url: "git@github.com:zapatacomputing/qe-psi4.git"
     branch: "master"
+- name: OpenFermion-Psi4
+  type: git
+  parameters:
+    url: "git@github.com:quantumlib/OpenFermion-Psi4.git"
+    branch: "master"
 #url: "git@github.com:quantumlib/OpenFermion-Cirq.git#0.4.0"
 
 # Data to help you easily work with your workflow
@@ -68,7 +73,7 @@ spec:
         template: spacedog-of
         arguments:
           parameters:
-          - resources: [m-spacedog, OpenFermion, Cirq, OpenFermion-Cirq]
+          - resources: [m-spacedog, OpenFermion, Cirq, OpenFermion-Cirq, qe-psi4, OpenFermion-Psi4]
           artifacts:
 
 #    # This template runs the `z-transformation` template in the `ztransform` resource

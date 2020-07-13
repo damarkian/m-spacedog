@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 from openfermion.hamiltonians import MolecularData
-from .openfermionpsi4 import run_psi4
+from openfermionpsi4 import run_psi4
 
 import h5py
 import numpy as np
