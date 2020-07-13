@@ -28,14 +28,11 @@ resources:
   parameters:    
     url: "git@github.com:quantumlib/OpenFermion-Cirq.git"
     branch: "master"
-- name: OpenFermion-Psi4
+- name: qe-psi4
   type: git
   parameters:
-    url: "git@github.com:quantumlib/OpenFermion-Psi4.git"
-- name: Psi4
-  type: git
-  parameters:
-    url: "git@github.com:psi4/psi4.git"
+    url: "git@github.com:zapatacomputing/qe-psi4.git"
+    branch: "master"
 #url: "git@github.com:quantumlib/OpenFermion-Cirq.git#0.4.0"
 
 # Data to help you easily work with your workflow
