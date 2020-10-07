@@ -20,7 +20,7 @@ from .third_party.higham import fixed_trace_positive_projection
 from .gradient_hf import rhf_minimization
 from .objective import (RestrictedHartreeFockObjective, generate_hamiltonian)
 from .molecular_example_odd_qubits import make_h3_2_5
-from .molecular_example import make_h6_2_1
+from .molecular_example import (make_h6_2_1, make_hn)
 
 from .mfopt import moving_frame_augmented_hessian_optimizer
 from .opdm_functionals import RDMGenerator
@@ -40,7 +40,8 @@ def outputjson(_teststr, jsonfile):
 
 def of_test(jsonfile):
 
-    rhf_objective, molecule, parameters, obi, tbi = make_h6_2_1()
+    #rhf_objective, molecule, parameters, obi, tbi = make_h3_2_5()
+    rhf_objective, molecule, parameters, obi, tbi = make_hn(6, 0.5)
     ansatz, energy, gradient = rhf_func_generator(rhf_objective)
 
     # settings for quantum resources
