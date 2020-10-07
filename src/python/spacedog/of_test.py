@@ -41,7 +41,7 @@ def outputjson(_teststr, jsonfile):
 def of_test(jsonfile):
 
     #rhf_objective, molecule, parameters, obi, tbi = make_h3_2_5()
-    rhf_objective, molecule, parameters, obi, tbi = make_hn(6, 1.7)
+    rhf_objective, molecule, parameters, obi, tbi = make_hn(6, 2.1)
     ansatz, energy, gradient = rhf_func_generator(rhf_objective)
 
     # settings for quantum resources
